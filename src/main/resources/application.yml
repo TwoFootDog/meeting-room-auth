@@ -1,0 +1,34 @@
+# 스프링 context root 설정
+server:
+  port: 8080
+  servlet:
+    context-path: /auth/api/v1
+---
+# 스프링 기본 동작방식
+spring:
+  profiles:
+    active: local
+  messages:
+    basename: resultCode  # 응답 메시지는 resources/resultCode.yml 참고
+    encoding: UTF-8
+---
+# db 접속 관련
+spring:
+  datasource:
+    url: jdbc:mariadb://meeting-room-db.cklyw6tgbrhb.ap-northeast-2.rds.amazonaws.com:3306/authdb
+    username: admin
+    password: '!23qweASD'
+    driver-class-name: org.mariadb.jdbc.Driver
+
+---
+jwt:
+  secret: dkqjwlrkqkddpemfdjrktlsek
+  name: X-AUTH-TOKEN
+  expireSecond: 60 # 60초
+
+cookie:
+  expireSecond: 1209600 # 60초
+---
+# 로깅 관련
+logging:
+  config: classpath:log4j2.yml  # 로깅설정파일

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gauza.Repository.UserRepository">
+    <insert id="createUserInfoMast" parameterMap="map">
+        INSERT INTO T_USER_INFO_MAST
+        (NICKNAME
+        OUT_DT,
+        REQ_ID,
+        REG_DT,
+        UPD_ID,
+        UPD_DT)
+        VALUES
+        (#{nickname},
+        NULL,
+        'SYSTEM',
+        SYSDATE(),
+        'SYSTEM',
+        SYSDATE())
+        <selectKey resultType="int" keyProperty="userId" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <insert id="createUserLoginMast" parameterMap="map">
+        INSERT INTO T_USER_LOGN_MAST
+        (USER_ID,
+        LOGIN_ID,
+        PASSWD,
+        FAIL_CNT,
+        REG_ID,
+        REG_DT,
+        UPD_ID,
+        UPD_DT)
+        VALUES
+        (#{userId},
+        #{loginId},
+        #{passwd},
+        0,
+        'SYSTEM',
+        SYSDATE(),
+        'SYSTEM',
+        SYSDATE())
+    </insert>
+</mapper>
